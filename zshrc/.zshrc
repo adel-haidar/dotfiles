@@ -1,10 +1,3 @@
-# Enable Powerlevel10k instant prompt. Should stay close to the top of ~/.zshrc.
-# Initialization code that may require console input (password prompts, [y/n]
-# confirmations, etc.) must go above this block; everything else may go below.
-if [[ -r "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh" ]]; then
-  source "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh"
-fi
-
 # Neofetch
 neofetch
 
@@ -96,8 +89,6 @@ export PATH="$HOME/dev/flutter/bin:$PATH"
 # Add wisely, as too many plugins slow down shell startup.
 plugins=(aliases z battery git zsh-autosuggestions zsh-syntax-highlighting fast-syntax-highlighting zsh-autocomplete kubectl)
 
-source $ZSH/oh-my-zsh.sh
-
 # User configuration
 
 # export MANPATH="/usr/local/man:$MANPATH"
@@ -134,9 +125,13 @@ export NVM_DIR="$HOME/.nvm"
 # To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
 [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
 
-# ruby
+# Aliases
 alias ls='lsd'
 alias la='lsd -lah'
+alias gst='git status'
+alias ga='git add'
+alias gp='git push'
+alias gpl='git pull'
 
 # Fuzzy search directory and cd into it
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
@@ -145,38 +140,5 @@ fcd() {
   dir=$(find ${1:-.} -path '*/\.*' -prune -o -type d -print 2> /dev/null | fzf --height 40% --border --ansi --preview 'tree -C {} | head -200' --preview-window=right:60%) &&
   cd "$dir"
 }
+
 autoload -Uz compinit && compinit
-# Jenf Configuration
-export PATH="$HOME/.jenv/bin:$PATH"
-eval "$(jenv init -)"
-
-# Artemis activemq
-export ARTEMIS_USER="artemis"
-
-export ARTEMIS_PASSWORD="artemis"
-
-export ANONYMOUS_LOGIN=true
-
-export EXTRA_ARGS="--http-host 0.0.0.0 --relax-jolokia"
-
-#THIS MUST BE AT THE END OF THE FILE FOR SDKMAN TO WORK!!!
-export SDKMAN_DIR="$HOME/.sdkman"
-[[ -s "$HOME/.sdkman/bin/sdkman-init.sh" ]] && source "$HOME/.sdkman/bin/sdkman-init.sh"
-# export DOCKER_HOST=tcp://localhost:60022
-
-
-# Load Angular CLI autocompletion.
-source <(ng completion script)
-
-# Add JBang to environment
-alias j!=jbang
-export PATH="$HOME/.jbang/bin:$PATH"
-
-# Resolving the “Chromium Binary Not Available for arm64” Error during Puppeteer Installation on M1/M2 Macs See: https://arc.net/l/quote/dhyqzipd
-export PUPPETEER_SKIP_CHROMIUM_DOWNLOAD=true
-export PUPPETEER_EXECUTABLE_PATH=`which chromium`
-# The following lines have been added by Docker Desktop to enable Docker CLI completions.
-fpath=(/Users/adel.haidar/.docker/completions $fpath)
-autoload -Uz compinit
-compinit
-# End of Docker CLI completions
