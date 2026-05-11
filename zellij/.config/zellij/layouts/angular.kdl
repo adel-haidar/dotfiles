@@ -1,0 +1,19 @@
+layout {
+    pane split_direction="vertical" {
+        pane size="65%" {
+            // Neovim - main editor
+            command "nvim"
+            args "."
+        }
+        pane split_direction="horizontal" {
+            pane size="50%" {
+                // ng serve
+                name "dev-server"
+            }
+            pane size="50%" {
+                // terminal for git, ng generate, etc
+                name "terminal"
+            }
+        }
+    }
+}

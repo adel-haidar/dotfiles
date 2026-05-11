@@ -1,0 +1,26 @@
+layout {
+    default_tab_template {
+        pane size=1 borderless=true {
+            plugin location="tab-bar"
+        }
+        children
+        pane size=1 borderless=true {
+            plugin location="status-bar"
+        }
+    }
+
+    tab name="editor" focus=true {
+        pane split_direction="vertical" {
+            pane name="nvim" size="75%" command="nvim" {
+                args "."
+            }
+            pane split_direction="horizontal" {
+                pane name="terminal" size="60%"
+            }
+        }
+    }
+
+    tab name="ai" {
+        pane name="claude-code" command="claude"
+    }
+}
